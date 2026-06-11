@@ -80,7 +80,9 @@ todo/
 │   └── Migrations/             EF Core schema migrations
 ├── frontend/           Vite + React + TypeScript
 │   └── src/
-│       ├── App.tsx            UI (auth form + task list)
+│       ├── App.tsx            root: holds the token, routes to auth vs. tasks
+│       ├── components/        AuthForm, TaskList, TaskItem
+│       ├── lib/dates.ts       overdue / due-date helpers (pure, testable)
 │       ├── useTasks.ts        hook owning task state + API calls
 │       ├── api.ts             thin fetch wrapper (attaches the JWT)
 │       └── index.css          plain CSS (semantic classes, no UI library)
