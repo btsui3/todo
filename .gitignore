@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+
+# Local SQLite database (created on first run)
+*.db
+*.db-shm
+*.db-wal
+
+# Node / Vite
+node_modules/
+dist/
+
+# Editor/OS
+.DS_Store
+.vs/
+.idea/
