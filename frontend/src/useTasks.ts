@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
 import { createTask, deleteTask, getTasks, updateTask, type Task } from './api'
 
-// Owns the task list and all server interactions, so components stay presentational.
-// `onUnauthorized` fires when a call returns 401 (expired token) → caller logs out.
 export function useTasks(token: string, onUnauthorized: () => void) {
   const [tasks, setTasks] = useState<Task[]>([])
   const [error, setError] = useState<string | null>(null)
 
-  // Any call can fail because the token expired → send the user back to login.
   function handleError(err: unknown) {
     if (err instanceof Error && err.message === 'Unauthorized') onUnauthorized()
     else setError(err instanceof Error ? err.message : 'Something went wrong')
@@ -18,7 +15,6 @@ export function useTasks(token: string, onUnauthorized: () => void) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
-  // Returns true on success so the caller can clear its inputs only when the add worked.
   async function addTask(title: string, dueDate: string | null): Promise<boolean> {
     setError(null)
     try {

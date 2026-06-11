@@ -1,7 +1,6 @@
 import type { Task } from '../api'
 import { formatDueDate, isOverdue } from '../lib/dates'
 
-// A single row in the task list: complete toggle, title, optional due date, delete.
 export function TaskItem({
   task,
   onToggle,

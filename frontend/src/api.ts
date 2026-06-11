@@ -18,7 +18,6 @@ export function setToken(token: string | null) {
   else localStorage.removeItem(TOKEN_KEY)
 }
 
-// Log in / sign up both post {email, password} and return a JWT on success.
 export const login = (email: string, password: string) =>
   postAuth('/api/auth/login', email, password)
 
@@ -53,8 +52,6 @@ export const updateTask = (
 export const deleteTask = (token: string, id: string) =>
   send<void>(token, 'DELETE', `/api/tasks/${id}`)
 
-// Shared request helper: attaches the JWT, and turns error responses into
-// thrown Errors carrying a user-facing message.
 async function send<T>(token: string, method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch(path, {
     method,
@@ -66,9 +63,6 @@ async function send<T>(token: string, method: string, path: string, body?: unkno
   return res.status === 204 ? (undefined as T) : res.json()
 }
 
-// Pulls readable text out of an ASP.NET ProblemDetails / ValidationProblemDetails.
-// Joins all field messages so e.g. every password-policy rule is shown at once;
-// otherwise falls back to the problem's `detail`/`title`.
 async function errorMessage(res: Response): Promise<string> {
   const body = await res.json().catch(() => null)
   const fieldErrors = body?.errors as Record<string, string[]> | undefined

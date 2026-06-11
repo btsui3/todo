@@ -1,7 +1,6 @@
 import type { Task } from '../api'
 
-// A task is overdue if its due date is before *today in the user's own
-// timezone* and it isn't done yet. We compare against the local calendar date
+//  We compare against the local calendar date
 // (not UTC) so a deadline doesn't flip "overdue" a day early/late near midnight.
 export function isOverdue(task: Task): boolean {
   if (!task.dueDate || task.isComplete) return false

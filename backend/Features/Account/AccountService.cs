@@ -3,11 +3,6 @@ using TodoApi.Auth;
 
 namespace TodoApi.Features.Account;
 
-/// <summary>
-/// The outcome of a register/login attempt, kept HTTP-agnostic so the logic can be
-/// unit-tested without spinning up the web stack. The endpoint translates it to an
-/// <see cref="IResult"/>.
-/// </summary>
 public sealed record AuthOutcome
 {
     public string? Token { get; private init; }
@@ -19,11 +14,6 @@ public sealed record AuthOutcome
     public static AuthOutcome Unauthorized() => new() { IsUnauthorized = true };
 }
 
-/// <summary>
-/// Owns account workflows: creating users, verifying credentials, and turning
-/// ASP.NET Identity's results into clean, field-keyed messages. Keeping this out of
-/// the endpoint makes the only non-trivial auth logic (the error mapping) testable.
-/// </summary>
 public sealed class AccountService(UserManager<IdentityUser> users, TokenService tokens)
 {
     public async Task<AuthOutcome> RegisterAsync(string email, string password)
