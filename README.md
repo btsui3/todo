@@ -85,7 +85,6 @@ todo/
 │       ├── api.ts             thin fetch wrapper (attaches the JWT)
 │       └── index.css          plain CSS (semantic classes, no UI library)
 ├── tests/              xUnit integration tests (high-risk areas)
-├── docs/adr/           Architecture Decision Records
 ```
 
 The backend is organized as **vertical slices**: each feature's routes, request
